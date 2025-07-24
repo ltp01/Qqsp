@@ -103,3 +103,18 @@ jobs:
           name: Qqsp-rpm-package
           path: |
             **/*.rpm
+
+  release:
+    needs:
+      - package_deb
+      - package_rpm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: artifact
+          pattern: Qqsp-*-package
+          merge-multiple: true
+      - run: ls -R artifact
+
