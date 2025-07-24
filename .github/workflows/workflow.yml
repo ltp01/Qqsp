@@ -23,6 +23,7 @@ jobs:
           mkdir build
           cd build
           cp ../package.yml ./
+          cp ../src/Qqsp.desktop ./
           qmake ../src/Qqsp.pro
           make
       - name: create icons
@@ -41,6 +42,7 @@ jobs:
           name: Qqsp
           path: |
             build/Qqsp
+            build/Qqsp.desktop
             build/*.png
             build/package.yml
   
