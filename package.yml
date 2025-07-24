@@ -25,4 +25,8 @@ files:
   "/usr/share/icons/hicolor/256x256/apps/qsp.png":
     file: 256.png
     mode: "0644"
-depends: [ 'libqt5webenginewidgets5', 'libqt5multimedia5', 'libqt5webengine5' ]
+overrides:
+  deb:
+    depends: [ 'libqt5webenginewidgets5', 'libqt5multimedia5', 'libqt5webengine5' ]
+  rpm:
+    depends: [ 'qt5-qtwebengine', 'qt5-qtmultimedia' ]
