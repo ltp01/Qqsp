@@ -22,6 +22,7 @@ jobs:
         run: |
           mkdir build
           cd build
+          cp ../package.yml ./
           qmake ../src/Qqsp.pro
           make
       - name: create icons
@@ -41,7 +42,7 @@ jobs:
           path: |
             build/Qqsp
             build/*.png
-            package.yml
+            build/package.yml
   
   package_deb:
     needs: build_and_publish
@@ -54,6 +55,8 @@ jobs:
         with:
           artifact-ids: ${{ env.artifact-id }}
           path: artifact
+      - name: Display structure
+        run: ls -R artifact/
       - name: Create deb package
         uses: kentik/pkg@v1.0.0-rc8
         with:
