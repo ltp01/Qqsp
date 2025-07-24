@@ -24,6 +24,7 @@ jobs:
           make
       - name: create icons
         run: |
+          cd build
           sudo apt install imagemagick -y
           convert ../src/icons/qsp-logo-512.png -resize 16x16 16.png
           convert ../src/icons/qsp-logo-512.png -resize 48x48 48.png
