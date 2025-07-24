@@ -57,8 +57,8 @@ jobs:
         with:
           artifact-ids: ${{ env.artifact-id }}
           path: artifact
-      - name: Display structure
-        run: ls -R artifact/
+      - name: Copy to root
+        run: cp artifact/Qqsp/* ./
       - name: Create deb package
         uses: kentik/pkg@v1.0.0-rc8
         with:
@@ -66,7 +66,7 @@ jobs:
           version: 1.9
           arch: x86_64
           format: deb
-          package: artifact/Qqsp/package.yml
+          package: package.yml
       - name: Upload Package
         id: artifact-upload-step
         uses: actions/upload-artifact@v4
