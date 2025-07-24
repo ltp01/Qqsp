@@ -27,7 +27,7 @@ prepare() {
 build() {
   cd "${_pkgname}/build"
   qmake-qt5 .. PREFIX=/usr
-  make
+  make CC=gcc14 CFLAGS='-Wno-error=incompatible-pointer-types'
 }
 
 package() {

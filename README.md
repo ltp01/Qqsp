@@ -39,6 +39,22 @@ Install the rpm package
   sudo dnf5 install Qqsp-1.9-1.x86_64.rpm
 ```
 
+### Arch
+
+Clone the repo and cd into the src folder
+
+Ensure you have gcc14 install
+
+```bash
+  sudo pacman -S gcc14
+```
+
+Then build the package
+
+```bash
+  makepkg -si
+```
+
 ### NixOS
 
 Can be built using flake
