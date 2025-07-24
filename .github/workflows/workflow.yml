@@ -7,8 +7,34 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
-  build:
+  build_and_publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install Build Packages
+        run: |
+          sudo apt-get update
+          sudo apt install build-essential qtbase5-dev qtmultimedia5-dev qtwebengine5-dev -y
+      - name: make
+        run: |
+          mkdir build
+          cd build
+          qmake ../src/Qqsp.pro
+          make
+      - name: create icons
+        run: |
+          sudo apt install imagemagick -y
+          convert ../src/icons/qsp-logo-512.png -resize 16x16 16.png
+          convert ../src/icons/qsp-logo-512.png -resize 48x48 48.png
+          convert ../src/icons/qsp-logo-512.png -resize 64x64 64.png
+          convert ../src/icons/qsp-logo-512.png -resize 128x128 128.png
+          convert ../src/icons/qsp-logo-512.png -resize 256x256 256.png
+      - name: Upload
+        id: artifact-upload-step
+        uses: actions/upload-artifact@v4
+        with:
+          name: Qqsp
+          path: |
+            Qqsp
+            *.png
