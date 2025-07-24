@@ -103,3 +103,24 @@ jobs:
           name: Qqsp-rpm-package
           path: |
             **/*.rpm
+
+  release:
+    if: github.ref_type == 'tag'
+    needs:
+      - package_deb
+      - package_rpm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: artifact
+          pattern: Qqsp-*-package
+          merge-multiple: true
+      - run: ls -R artifact
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            artifact/Qqsp*
+
