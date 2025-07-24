@@ -37,5 +37,5 @@ jobs:
         with:
           name: Qqsp
           path: |
-            Qqsp
-            *.png
+            build/Qqsp
+            build/*.png
