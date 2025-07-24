@@ -46,9 +46,9 @@ jobs:
   package_deb:
     needs: build_and_publish
     runs-on: ubuntu-latest
+    env:
+      artifact-id: ${{ needs.build_and_publish.outputs.artifact-id }}
     steps:
-      - env:
-        artifact-id: ${{ needs.build_and_publish.outputs.artifact-id }}
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
