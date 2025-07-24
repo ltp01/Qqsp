@@ -19,6 +19,7 @@ CONFIG += c++14
 #CONFIG += c11
 #QMAKE_CXXFLAGS+= -std=c++14
 QMAKE_CFLAGS += -std=c11
+QMAKE_CFLAGS += -Wno-error=incompatible-pointer-types
 
 INCLUDEPATH += $$PWD/qsp/bindings/default/
 #INCLUDEPATH += $$PWD/qsp/qsp/
