@@ -1,0 +1,27 @@
+meta:
+  description: Qqsp
+  vendor: ltp01
+  maintainer: ltp01
+files:
+  "/usr/bin/Qqsp":
+    file: Qqsp
+    mode: "0755"
+    user: "root"
+  "/usr/share/applications/qqsp.desktop":
+    file: Qqsp.desktop
+    mode: "0644"
+  "/usr/share/icons/hicolor/16x16/apps/qsp.png":
+    file: 16.png
+    mode: "0644"
+  "/usr/share/icons/hicolor/48x48/apps/qsp.png":
+    file: 48.png
+    mode: "0644"
+  "/usr/share/icons/hicolor/64x64/apps/qsp.png":
+    file: 64.png
+    mode: "0644"
+  "/usr/share/icons/hicolor/128x128/apps/qsp.png":
+    file: 128.png
+    mode: "0644"
+  "/usr/share/icons/hicolor/256x256/apps/qsp.png":
+    file: 256.png
+    mode: "0644"

@@ -9,6 +9,8 @@ on:
 jobs:
   build_and_publish:
     runs-on: ubuntu-latest
+    outputs:
+      artifact-id: ${{ steps.artifact-upload-step.outputs.artifact-id }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,3 +41,32 @@ jobs:
           path: |
             build/Qqsp
             build/*.png
+            package.yml
+  
+  package_deb:
+    needs: build_and_publish
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+        artifact-id: ${{ needs.build_and_publish.outputs.artifact-id }}
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ artifact-id }}
+          name: qqsp-bin
+          path: artifact
+      - name: Create deb package
+        uses: kentik/pkg@v1.0.0-rc8
+        with:
+          name: Qqsp
+          version: 1.9
+          arch: x86_64
+          format: deb
+          package: artifact/package.yml
+      - name: Upload Package
+        id: artifact-upload-step
+        uses: actions/upload-artifact@v4
+        with:
+          name: Qqsp-deb-package
+          path: |
+            **/*.deb
