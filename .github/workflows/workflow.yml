@@ -105,6 +105,7 @@ jobs:
             **/*.rpm
 
   release:
+    if: github.ref_type == 'tag'
     needs:
       - package_deb
       - package_rpm
@@ -117,4 +118,9 @@ jobs:
           pattern: Qqsp-*-package
           merge-multiple: true
       - run: ls -R artifact
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            artifact/Qqsp*
 
