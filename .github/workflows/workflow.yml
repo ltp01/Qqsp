@@ -61,6 +61,10 @@ jobs:
           path: artifact
       - name: Copy to root
         run: cp artifact/Qqsp/* ./
+      - name: Create AppDir
+        run: |
+          mkdir -p AppDir/usr/bin
+          cp Qqsp AppDir/usr/bin
       - name: Build AppImage
         uses: AppImageCrafters/build-appimage@v1
         with:

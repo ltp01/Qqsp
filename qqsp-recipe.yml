@@ -22,6 +22,12 @@ AppDir:
       - libqt5webenginewidgets5 
       - libqt5multimedia5
       - libqt5webengine5
+    exclude:
+      - phonon4qt5
+      - libkf5service-bin
+      - perl
+      - perl-base
+      - libpam-runtime
 
   test:
     debian:
