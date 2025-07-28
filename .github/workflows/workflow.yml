@@ -24,7 +24,7 @@ jobs:
           cd build
           cp ../package.yml ./
           cp ../src/Qqsp.desktop ./
-          cp ../src/qqsp-recipe.yml ./
+          cp ../qqsp-recipe.yml ./
           qmake ../src/Qqsp.pro
           make
       - name: create icons
@@ -46,6 +46,7 @@ jobs:
             build/Qqsp.desktop
             build/*.png
             build/package.yml
+            build/qqsp-recipe.yml
 
   build_appimage:
     needs: build_and_publish
