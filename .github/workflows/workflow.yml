@@ -24,6 +24,7 @@ jobs:
           cd build
           cp ../package.yml ./
           cp ../src/Qqsp.desktop ./
+          cp ../src/qqsp-recipe.yml ./
           qmake ../src/Qqsp.pro
           make
       - name: create icons
@@ -45,6 +46,25 @@ jobs:
             build/Qqsp.desktop
             build/*.png
             build/package.yml
+
+  build_appimage:
+    needs: build_and_publish
+    runs-on: ubuntu-latest
+    env:
+      artifact-id: ${{ needs.build_and_publish.outputs.artifact-id }}
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ env.artifact-id }}
+          path: artifact
+      - name: Copy to root
+        run: cp artifact/Qqsp/* ./
+      - name: Build AppImage
+        uses: AppImageCrafters/build-appimage@v1
+        with:
+          recipe: "./qqsp-recipe.yml"
+
   
   package_deb:
     needs: build_and_publish
