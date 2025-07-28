@@ -19,7 +19,6 @@ AppDir:
       - sourceline: 'deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse'
 
     include:
-      - Qqsp
       - libqt5webenginewidgets5 
       - libqt5multimedia5
       - libqt5webengine5
