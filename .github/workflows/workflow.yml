@@ -75,7 +75,7 @@ jobs:
           # Copy binary
           cp Qqsp AppDir/usr/bin/Qqsp
       - name: Build AppImage
-        uses: AppImageCrafters/build-appimage@v1
+        uses: AppImageCrafters/build-appimage@master
         with:
           recipe: "./qqsp-recipe.yml"
       - name: Upload Package
