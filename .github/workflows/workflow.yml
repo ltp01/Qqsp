@@ -65,11 +65,15 @@ jobs:
         run: |
           mkdir -p AppDir/usr/bin
 
+          # Copy icons
           for i in 16 48 64 128 256
           do
             mkdir -p "AppDir/usr/share/icons/hicolor/$i/apps"
             cp "$i.png" "AppDir/usr/share/icons/hicolor/$i/apps/qsp.png"
           done
+
+          # Copy binary
+          cp Qqsp AppDir/usr/bin/Qqsp
       - name: Build AppImage
         uses: AppImageCrafters/build-appimage@v1
         with:
