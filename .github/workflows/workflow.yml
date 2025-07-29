@@ -48,7 +48,7 @@ jobs:
             build/package.yml
             build/qqsp-recipe.yml
 
-  build_appimage:
+  package_appimage:
     needs: build_and_publish
     runs-on: ubuntu-latest
     env:
@@ -68,7 +68,7 @@ jobs:
           for i in 16 48 64 128 256
           do
             mkdir -p "AppDir/usr/share/icons/hicolor/$i/apps"
-            cp "$1.png" "AppDir/usr/share/icons/hicolor/$i/apps/qsp.png"
+            cp "$i.png" "AppDir/usr/share/icons/hicolor/$i/apps/qsp.png"
           done
       - name: Build AppImage
         uses: AppImageCrafters/build-appimage@v1
@@ -138,7 +138,7 @@ jobs:
     needs:
       - package_deb
       - package_rpm
-      - build_appimage
+      - package_appimage
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
