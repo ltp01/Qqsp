@@ -68,8 +68,8 @@ jobs:
           # Copy icons
           for i in 16 48 64 128 256
           do
-            mkdir -p "AppDir/usr/share/icons/hicolor/$i/apps"
-            cp "$i.png" "AppDir/usr/share/icons/hicolor/$i/apps/qsp.png"
+            mkdir -p AppDir/usr/share/icons/hicolor/"$i"x"$i"/apps
+            cp "$i".png AppDir/usr/share/icons/hicolor/"$i"x"$i"/apps/qsp.png
           done
 
           # Copy binary
@@ -78,7 +78,14 @@ jobs:
         uses: AppImageCrafters/build-appimage@v1
         with:
           recipe: "./qqsp-recipe.yml"
-  
+      - name: Upload Package
+        id: artifact-upload-step
+        uses: actions/upload-artifact@v4
+        with:
+          name: Qqsp-appimage-package
+          path: |
+            **/*.AppImage 
+
   package_deb:
     needs: build_and_publish
     runs-on: ubuntu-latest
