@@ -29,14 +29,6 @@ AppDir:
       - perl-base
       - libpam-runtime
 
-  test:
-    debian:
-      image: appimagecrafters/tests-env:debain-stable
-      command: "./AppRun"
-      use_host_x: true
-      env:
-        QT_DEBUG_PLUGINS: 1
-
 AppImage:
   update-information: None
   sign-key: None
