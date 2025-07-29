@@ -31,4 +31,5 @@ AppDir:
 
 AppImage:
   update-information: None
-  sign-key: Non
+  sign-key: None
+  arch: x86_64
