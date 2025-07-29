@@ -64,12 +64,16 @@ jobs:
       - name: Create AppDir
         run: |
           mkdir -p AppDir/usr/bin
-          cp Qqsp AppDir/usr/bin
+
+          for i in 16 48 64 128 256
+          do
+            mkdir -p AppDir/usr/share/icons/hicolor/$i/apps
+            cp $1.png AppDir/usr/share/icons/hicolor/$i/apps/qsp.png
+          done
       - name: Build AppImage
         uses: AppImageCrafters/build-appimage@v1
         with:
           recipe: "./qqsp-recipe.yml"
-
   
   package_deb:
     needs: build_and_publish
