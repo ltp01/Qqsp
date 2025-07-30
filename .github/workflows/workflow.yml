@@ -65,30 +65,56 @@ jobs:
           path: artifact
       - name: Copy to root
         run: cp artifact/Qqsp/* ./
-      - name: Create AppDir
-        run: |
-          mkdir -p AppDir/usr/bin
-
-          # Copy icons
-          for i in 16 48 64 128 256
-          do
-            mkdir -p AppDir/usr/share/icons/hicolor/"$i"x"$i"/apps
-            cp "$i".png AppDir/usr/share/icons/hicolor/"$i"x"$i"/apps/qsp.png
-          done
-
-          # Copy binary
-          cp Qqsp AppDir/usr/bin/Qqsp
       - name: Build AppImage
-        uses: AppImageCrafters/build-appimage@master
+        uses: Kidev/qt-appimage@v1
         with:
-          recipe: "./qqsp-recipe.yml"
-      - name: Upload Package
-        id: artifact-upload-step
-        uses: actions/upload-artifact@v4
-        with:
-          name: Qqsp-appimage-package
-          path: |
-            **/*.AppImage 
+          install_folder: 'artifact/Qqsp'
+          app_name: 'Qqsp'
+          category: 'Games,Applications'
+          icon: 'artifact/Qqsp/256.png'
+          binary: 'Qqsp'  
+
+#  package_appimage:
+#    needs: build_and_publish
+#    runs-on: ubuntu-latest
+#    env:
+#      artifact-id: ${{ needs.build_and_publish.outputs.artifact-id }}
+#    steps:
+#      - name: Install Build Packages
+#        run: |
+#          sudo apt-get update
+#          sudo apt install squashfs-tools -y
+#      - name: Download artifact
+#        uses: actions/download-artifact@v4
+#        with:
+#          artifact-ids: ${{ env.artifact-id }}
+#          path: artifact
+#      - name: Copy to root
+#        run: cp artifact/Qqsp/* ./
+#      - name: Create AppDir
+#        run: |
+#          mkdir -p AppDir/usr/bin
+#
+#          # Copy icons
+#          for i in 16 48 64 128 256
+#          do
+#            mkdir -p AppDir/usr/share/icons/hicolor/"$i"x"$i"/apps
+#            cp "$i".png AppDir/usr/share/icons/hicolor/"$i"x"$i"/apps/qsp.png
+#          done
+#
+#          # Copy binary
+#          cp Qqsp AppDir/usr/bin/Qqsp
+#      - name: Build AppImage
+#        uses: AppImageCrafters/build-appimage@master
+#        with:
+#          recipe: "./qqsp-recipe.yml"
+#      - name: Upload Package
+#        id: artifact-upload-step
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: Qqsp-appimage-package
+#          path: |
+#            **/*.AppImage 
 
   package_deb:
     needs: build_and_publish
