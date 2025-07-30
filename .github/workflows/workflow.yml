@@ -68,10 +68,10 @@ jobs:
       - name: Build AppImage
         uses: Kidev/qt-appimage@v1
         with:
-          install_folder: 'artifact/Qqsp/Qqsp'
+          install_folder: './'
           app_name: 'Qqsp'
           category: 'Games,Applications'
-          icon: 'artifact/Qqsp/256.png'
+          icon: './256.png'
           binary: 'Qqsp'  
 
 #  package_appimage:
